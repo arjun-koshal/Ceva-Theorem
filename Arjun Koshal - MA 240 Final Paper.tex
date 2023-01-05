@@ -1,0 +1,304 @@
+\documentclass[12pt,a4paper,reqno,parskip=full]{amsart}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{colonequals}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{hyperref}
+\graphicspath{ {./MA 240 (Spring 2022)/} }
+
+\begingroup
+\makeatletter
+\@for\theoremstyle:=definition,remark,plain\do{
+\expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{
+\addtolength\thm@preskip\parskip}}
+\endgroup
+
+\numberwithin{equation}{section}
+\addtolength{\textwidth}{3 truecm}
+\addtolength{\textheight}{1 truecm}
+\setlength{\voffset}{-.6 truecm}
+\setlength{\hoffset}{-1.3 truecm}
+\theoremstyle{plain}
+
+\newtheorem{theorem}[subsection]{Theorem}
+\newtheorem{proposition}[subsection]{Proposition}
+\newtheorem{lemma}[subsection]{Lemma}
+\newtheorem{corollary}[subsection]{Corollary}
+\newtheorem{claim}[subsection]{Claim}
+\newtheorem{conjecture}[subsection]{Conjecture}
+\newtheorem{question}[subsection]{Question}
+\newtheorem{remark}[subsection]{Remark}
+
+\theoremstyle{definition}
+
+\newtheorem{definition}[subsection]{Definition}
+\newtheorem{example}[subsection]{Example}
+
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\BS}{BS}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Ham}{Ham}
+
+\def\AA{{\mathcal A}}
+\def\CC{{\mathcal C}}
+\def\DD{{\mathcal D}}
+\def\E{{\mathbb E}}
+\def\EE{{\mathcal E}}
+\def\FF{{\mathbb F}}
+\def\II{{\mathcal I}}
+\def\N{{\mathbb N}}
+\def\OO{{\mathcal O}}
+\def\PP{{\mathcal P}}
+\def\Q{{\mathbb Q}}
+\def\R{{\mathbb R}}
+\def\S{{\mathbb S}}
+\def\SS{{\mathcal S}}
+\def\UU{{\mathcal U}}
+\def\Z{{\mathbb Z}}
+
+\begin{document}
+
+\title{Proof and Exploration of Ceva's Theorem}
+
+\author{Arjun Koshal}
+
+\begin{abstract}
+This paper explores Ceva's theorem and its significance in plane geometry. We provide a brief introduction to Ceva's theorem with history, and definitions that are essential to the proof. Next, through the usage of the basic properties of triangle areas, we draw our analyses, and extend Ceva's theorem to spherical and hyperbolic geometry. Finally, we aim to generalize Ceva's theorem to polygons with an odd number of sides.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+Ceva's theorem focuses on triangles in Euclidean plane geometry. The theorem is mostly attributed to solving problems in affine plane geometry and proving the segments drawn from the vertex of the triangle to their opposite sides of a triangle (cevians) congruence in the triangle. The theorem is named after the Italian Mathematician Giovanni Ceva, who published the theorem in his 1678 work De lineis rectis. Interestingly enough, the theorem was proven much earlier by Yusuf Al-Mu'taman ibn Hűd, an eleventh-century king of Zaragoza. \cite{1}
+
+The purpose of this paper is to show that cevians intersect at exactly a point when the ratio of the products of all the drawn segments of the triangle from each side is equal to one. While there are several proofs of Ceva's theorem \cite{2}, this paper will provide a proof using only basic properties of triangle areas. Also, some corollaries that are consequences of the Cevas’s theorem, which we will discuss in this paper, include special cases of Cevians. These special cases include medians, altitudes, and interior angle bisectiors. All of these cevians intersect at a specific point, which are essential in modern high school geometry courses.
+
+\section{Background}
+First, let us state definitions necessary to prove Ceva's theorem. 
+\begin{itemize}
+  \item Three or more line segments in the plane are $\emph{concurrent}$ if they have a common point of intersection.
+  \item A $\emph{cevian}$ of a triangle $\triangle$ABC is a line segment with one endpoint at one vertex of the triangle (say $\emph{A}$) and one endpoint on the opposite line (say $\overleftrightarrow{BC}$), but not passing through the opposite vertices ($\emph{B}$ or $\emph{C}$).
+\end{itemize}
+
+\begin{figure}[H]
+     \centering
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{nonconcurrentceva}
+         \caption{Non-concurrent Cevians}
+         \label{fig:y equals x}
+     \end{subfigure}
+     \hspace{2cm}
+     \begin{subfigure}[b]{0.295\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{concurrentceva}
+         \caption{Concurrent Cevians}
+         \label{fig:three sin x}
+     \end{subfigure}
+        \caption{Examples of Cevians}
+        \label{fig:cevians}
+\end{figure}
+
+We can see in Figure 1 that the triangle on the right (B) has the cevians all intersect at a single point; in this case we say that the cevians are concurrent at that point. In the triangle on the left (A), the cevians are not concurrent, since the 3 cevians do not intersect at a single point.
+
+
+Throughout this paper, we shall denote the length of a line segment $\overline{\rm AB}$ to be $|AB|$ and the area of a triangle $\triangle$ABC to be [ABC].
+
+\section{Main result}
+
+\begin{lemma} The areas of triangles with equal altitude are proportional to the bases of the triangles.
+\end{lemma}
+\begin{theorem} [\textbf{Ceva's Theorem}]
+Let $ABC$ be a triangle, and let $D, E, F$ be points on lines $\overleftrightarrow{BC}$, $\overleftrightarrow{CA}$, $\overleftrightarrow{AB}$, respectively. If the cevians $\overline{\rm AD}$, $\overline{\rm BE}$, and $\overline{\rm CF}$ are concurrent, then
+\begin{align*}
+\frac{|AF|}{|FB|}\cdot\frac{|BD|}{|DC|}\cdot\frac{|CE|}{|EA|} = 1.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+We must consider two cases; the first being that the cevians are concurrent at a point that lies inside $\triangle$ABC and the second being that the cevians are concurrent at a point that lies outside $\triangle$ABC.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{figure1}
+    \caption{Case 1: Point of Concurrence Lies Inside $\triangle$ABC}
+    \label{fig:figure1}
+\end{figure}
+
+As we can see in Figure 2, the cevians $\overline{\rm AD}$, $\overline{\rm BE}$, and $\overline{\rm CF}$ all concur at a point $O$. Since all the ratios are positive, it follows that the right hand side of Ceva's Theorem must be positive.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{figure2}
+    \caption{Case 2: Point of Concurrence Lies Outside $\triangle$ABC}
+    \label{fig:figure2}
+\end{figure}
+
+In Figure 3, we notice that the point of concurrence, $O$ lies outside of the triangle; however, $\frac{|CE|}{|EA|}$ is positive and both $\frac{|AF|}{|FB|}$ and $\frac{|BD|}{|DC|}$ are negative. Taking the product of these ratios yields a positive number, so it follows that the right hand side of Ceva's Theorem must be positive.
+\\
+\\
+In both cases, it holds true that the product of the ratios of the sides always yields a positive number.
+\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{triangle1}
+    \caption{The basic case of Ceva's Theorem}
+    \label{fig:triangle1}
+\end{figure}
+
+Now suppose $\overline{\rm AD}$, $\overline{\rm BE}$, and $\overline{\rm CF}$ concur at a point $G$. (Refer to Figure 4). It follows by Lemma 3.1:
+\\
+\begin{align*}
+\frac{|AF|}{|FB|} = \frac{[AFG]}{[FBG]} = \frac{[AFC]}{[FBC]} = \frac{[AFC] - [AFG]}{[FBC] - [FBG]} = \frac{[CAG]}{[CBG]}.
+\\
+\\
+\frac{|BD|}{|DC|} = \frac{[BDG]}{[DCG]} = \frac{[BDA]}{[DCA]} = \frac{[BDA] - [BDG]}{[DCA] - [DCG]} = \frac{[ABG]}{[ACG]}.
+\\
+\\
+\frac{|CE|}{|EA|} = \frac{[CEG]}{[EAG]} = \frac{[CEB]}{[EAB]} = \frac{[CEB] - [CEG]}{[EAB] - [EAG]} = \frac{[BCG]}{[BAG]}.
+\end{align*}
+\\
+It then follows that,
+\\
+\begin{align*}
+\frac{|AF|}{|FB|}\cdot\frac{|BD|}{|DC|}\cdot\frac{|CE|}{|EA|} = \frac{[CAG]}{[CBG]}\cdot\frac{[ABG]}{[ACG]}\cdot\frac{[BCG]}{[BAG]} = 1.
+\end{align*}
+\end{proof}
+\begin{theorem} [\textbf{Converse of Ceva's Theorem}]
+If the points D, E, F are chosen as in Figure 4, and if
+\begin{align*}
+\frac{|AF|}{|FB|}\cdot\frac{|BD|}{|DC|}\cdot\frac{|CE|}{|EA|} = 1,
+\end{align*}
+\\
+then the cevians $\overline{\rm AD}$, $\overline{\rm BE}$, and $\overline{\rm CF}$ are concurrent.
+\end{theorem}
+\begin{proof}
+Suppose $\frac{|AF|}{|FB|}\cdot\frac{|BD|}{|DC|}\cdot\frac{|CE|}{|EA|} = 1$ and $G$ be the point of intersection of $\overline{\rm AD}$ and $\overline{\rm BE}$. Let $\overline{\rm CG}$ meet $\overline{\rm AB}$ at $F'$. Then by the forward argument,
+\\
+\begin{align*}
+\frac{|AF'|}{|F'B|}\cdot\frac{|BD|}{|DC|}\cdot\frac{|CE|}{|EA|} = 1.
+\end{align*}
+It then follows by our assumption,
+\begin{align*}
+\frac{|AF'|}{|F'B|} = \frac{|AF|}{|FB|}.
+\end{align*}
+Both $F'$ and $F$ must divide $\overline{\rm AB}$ in the same ratio and must therefore be the same point. Thus the converse of Ceva's Theorem holds true.
+\end{proof}
+
+\section{Applications and discussion}
+
+There are many consequences of Ceva's theorem. The analogue of the theorem for general polygons has been known since the early nineteenth century.\cite{3} The main applications that this paper will focus on is a generalization of Ceva's theorem to polygons with an odd number of sides.
+
+\textbf{Generalization of Ceva's theorem to polygons with an odd number of sides}
+
+It is clear that Ceva's theorem does not hold for polygons with an even number of sides, therefore this paper will examine the existence of Ceva's theorem for polygons with an odd number of sides. There is a similar (not identical) property for such polygons, which is presented below for the case of a pentagon.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{pentagon}
+    \caption{Ceva's Theorem for Pentagon ABCDE}
+    \label{fig:pentagon}
+\end{figure}
+
+\begin{theorem}[\textbf{"Ceva's Theorem" for Pentagon}]
+Let $ABCDE$ be a pentagon, and let $F, G, H, I, J$ be points on lines $\overleftrightarrow{CD}$, $\overleftrightarrow{DE}$, $\overleftrightarrow{AE}$, $\overleftrightarrow{AB}$, $\overleftrightarrow{BC}$, respectively. If the cevians $\overline{\rm AF}$, $\overline{\rm BG}$, $\overline{\rm CH}$, $\overline{\rm DI}$, and $\overline{\rm EJ}$ are concurrent, then
+\begin{align*}
+\frac{|AH|}{|HE|}\cdot\frac{|EG|}{|GD|}\cdot\frac{|DF|}{|FC|}\cdot\frac{|CJ|}{|JB|}\cdot\frac{|BI|}{|IA|} = 1.
+\end{align*}
+\end{theorem}
+\begin{proof}
+The proof for the pentagon is similar to the proof presented in Theorem 3.2 for the triangle. Suppose $\overline{\rm AF}$, $\overline{\rm BG}$, $\overline{\rm CH}$, $\overline{\rm DI}$, and $\overline{\rm EJ}$ concur at a point $P$. (Refer to Figure 5). It follows by the same logic from Theorem 3.2:
+\\
+\begin{align*}
+\frac{|AH|}{|HE|} = \frac{[ACP]}{[ECP]}.
+\\
+\\
+\frac{|EG|}{|GD|} = \frac{[EBP]}{[DBP]}.
+\\
+\\
+\frac{|DF|}{|FC|} = \frac{[DAP]}{[CAP]}.
+\\
+\\
+\frac{|CJ|}{|JB|} = \frac{[CEP]}{[BEP]}.
+\\
+\\
+\frac{|BI|}{|IA|} = \frac{[BDP]}{[ADP]}.
+\end{align*}
+Therefore it follows,
+\\
+\begin{align*}
+\frac{|AH|}{|HE|}\cdot\frac{|EG|}{|GD|}\cdot\frac{|DF|}{|FC|}\cdot\frac{|CJ|}{|JB|}\cdot\frac{|BI|}{|IA|} = \frac{[ACP]}{[ECP]}\cdot\frac{[EBP]}{[DBP]}\cdot\frac{[DAP]}{[CAP]}\cdot\frac{[CEP]}{[BEP]}\cdot\frac{[BDP]}{[ADP]} = 1.
+\end{align*}
+\end{proof}
+
+\begin{theorem} [\textbf{Converse of "Ceva's Theorem" for Pentagon}]
+If the points F, G, H, I, and J are chosen as in Figure 5, and if
+\begin{align*}
+\frac{|AH|}{|HE|}\cdot\frac{|EG|}{|GD|}\cdot\frac{|DF|}{|FC|}\cdot\frac{|CJ|}{|JB|}\cdot\frac{|BI|}{|IA|} = 1,
+\end{align*}
+\\
+then the cevians $\overline{\rm AF}$, $\overline{\rm BG}$, $\overline{\rm CH}$, $\overline{\rm DI}$, and $\overline{\rm EJ}$ are concurrent.
+\end{theorem}
+\begin{proof}
+Suppose $\frac{|AH|}{|HE|}\cdot\frac{|EG|}{|GD|}\cdot\frac{|DF|}{|FC|}\cdot\frac{|CJ|}{|JB|}\cdot\frac{|BI|}{|IA|} = 1$ and $P$ be the point of intersection of $\overline{\rm AF}$, $\overline{\rm BG}$, $\overline{\rm CH}$, and $\overline{\rm DI}$. Let $\overline{\rm EP}$ meet $\overline{\rm BC}$ at $J'$. Then by the forward argument,
+\\
+\begin{align*}
+\frac{|AH|}{|HE|}\cdot\frac{|EG|}{|GD|}\cdot\frac{|DF|}{|FC|}\cdot\frac{|CJ'|}{|J'B|}\cdot\frac{|BI|}{|IA|} = 1.
+\end{align*}
+It then follows by our assumption,
+\begin{align*}
+\frac{|CJ'|}{|J'B|} = \frac{|CJ|}{|JB|}.
+\end{align*}
+Both $J'$ and $J$ must divide $\overline{\rm BC}$ in the same ratio and must therefore be the same point. Thus the converse of "Ceva's Theorem" for Pentagons holds true.
+\end{proof}
+
+The idea of the proof for Ceva's theorem can be generalized to polygons with an odd number of sides. It is possible to formulate the general theorem:
+\begin{theorem}[\textbf{"Ceva's Theorem" for Odd Number of Sided Polygons}]
+Let $A_1$, $A_2$, $A_3$, ..., $A_n$ be the vertices of a polygon, where $n$ is odd. Let $B_1$ be a point that lies between $A_1$ and $A_2$, $B_2$ be a point that lies between $A_2$ and $A_3$, ..., and $B_n$ be a point that lies between $A_n$ and $A_1$. If the $n$ cevians of the polygon concur, then
+\\
+\begin{align*}
+\frac{|A_1B_1|}{|B_1A_2|}\cdot\frac{|A_2B_2|}{|B_2A_3|}\cdot...\cdot\frac{|A_nB_n|}{|B_nA_1|} = 1.
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[\textbf{Converse of "Ceva's Theorem" for Odd Number of Sided Polygons}]
+If $\frac{|A_1B_1|}{|B_1A_2|}\cdot\frac{|A_2B_2|}{|B_2A_3|}\cdot...\cdot\frac{|A_nB_n|}{|B_nA_1|}$ = 1 and $n-1$ of the cevians concur, then the $n$-th cevian also passes through the same point of concurrence.
+\end{theorem}
+
+Both of these theorems have beautiful proofs, see \cite{4}. Overall, Ceva's theorem has various applications in affine geometry as well as projective geometry through barycentric coordinates, see \cite{5}. One key takeaway from Ceva's theorem is cevians. Cevians play a large role in geometric theorems regarding triangles. The alitiude, median, and angle bisector are all special cases of cevians. Several corollaries arise from Ceva's Theorem as well.
+
+\begin{corollary}
+The medians of a triangle are concurrent at the centroid.
+\end{corollary}
+
+\begin{corollary}
+The altitudes of a triangle are concurrent at the orthocenter.
+\end{corollary}
+
+\begin{corollary}
+The (interior) angle bisectors of a triangle are concurrent at the incenter.
+\end{corollary}
+
+The following corollaries have proofs that can be found here, \cite{6}. Ceva's Theorem is used in the proofs of many well-known theorems including the theorem of Napolean's point, the theorem of Fermat's point, and the theorem of the Nagel point. Because Ceva's Theorem deal with ideas that are so basic to the study of geometry, concurrence and collinearity, it is impossible to overlook them. However, many high school and college geometry courses do not mention Ceva's Theorem. But none the less, the principles behind the theorem are used and studied often in any geometry class.
+
+
+\begin{thebibliography}{15}
+\bibitem{1} Holme, Audun (2010). "Geometry: Our Cultural Heritage" arXiv, 2010, \url{https://archive.org/details/geometryourcultu00ahol}
+\bibitem{2} Russell, John Wellesley (1905). “An Elementary Treatise on Pure Geometry with Numerous Examples”. \url{https://books.google.com/books?id=r3ILAAAAYAAJ}
+\bibitem{3} Grünbaum, Branko; Shephard, G. C. (1995). "Ceva, Menelaus and the Area Principle". Mathematics Magazine. \url{https://www.tandfonline.com/doi/abs/10.1080/0025570X.1995.11996330}
+\bibitem{4} Jose N. Contreras (2015) "Discovering, Applying, and Extending Ceva's Theorem". \url{https://doi.org/10.5951/mathteacher.108.8.0632}
+\bibitem{5} Dennis Chen (2018) "Barycentric Coordinate". \url{https://www.geometryexplorer.xyz/pdfs/Barycentric%20Coordinates.pdf}
+\bibitem{6} Kate Berryman "Consequences of Ceva's Theorem". \url{http://jwilson.coe.uga.edu/EMAT6680Su12/Berryman/6690/BerrymanK-Ceva/berrymanceva.html}
+
+\end{thebibliography}
+
+\end{document}
